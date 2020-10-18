@@ -18,7 +18,6 @@ export default {
 @import "@/assets/mixins.scss";
 section.masthead {
   width: 100%;
-  height: 90vh;
   overflow: hidden;
   text-align: center;
   display: flex;
