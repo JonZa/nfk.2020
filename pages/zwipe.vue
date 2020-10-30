@@ -2,16 +2,18 @@
   <div class="zwipe">
     <button v-on:click="shuffleTiles">Shuffle</button>
     <br />
-    <div v-for="(tilesRow, rowIndex) in tilesArray" :key="rowIndex">
-      <template v-for="(tilesColumn, columnIndex) in tilesRow">
-        <input
-          type="text"
-          :value="tilesColumn"
-          :key="columnIndex"
-          readonly
-          v-on:click="clickTile(rowIndex, columnIndex)"
-        />
-      </template>
+    <div class="row" v-for="(tilesRow, rowIndex) in tilesArray" :key="rowIndex">
+      <div
+        v-for="(tile, columnIndex) in tilesRow"
+        :key="columnIndex"
+        v-on:click="clickTile(rowIndex, columnIndex)"
+        class="tile"
+        :style="[
+          tile !== null
+            ? { '--tileRow': tile[0], '--tileColumn': tile[1] }
+            : { background: 'none' }
+        ]"
+      />
     </div>
   </div>
 </template>
@@ -23,11 +25,35 @@ export default {
       columnNull: 0,
       rowNull: 0,
       tilesArray: [
-        ["a", "b", "c", "d", "e"],
-        ["f", "g", "h", "i", "j"],
-        ["k", "l", "m", "n", "o"],
-        ["p", "q", "r", "s", "t"],
-        ["u", "v", "w", "x", null]
+        [
+          [0, 0],
+          [0, 1],
+          [0, 2],
+          [0, 3],
+          [0, 4]
+        ],
+        [
+          [1, 0],
+          [1, 1],
+          [1, 2],
+          [1, 3],
+          [1, 4]
+        ],
+        [
+          [2, 0],
+          [2, 1],
+          [2, 2],
+          [2, 3],
+          [2, 4]
+        ],
+        [
+          [3, 0],
+          [3, 1],
+          [3, 2],
+          [3, 3],
+          [3, 4]
+        ],
+        [[4, 0], [4, 1], [4, 2], [4, 3], null]
       ]
     };
   },
@@ -36,7 +62,10 @@ export default {
   },
   methods: {
     clickTile(rowIndex, columnIndex) {
-      if ((rowIndex === this.rowNull && columnIndex === this.columnNull) || rowIndex !== this.rowNull && columnIndex !== this.columnNull) {
+      if (
+        (rowIndex === this.rowNull && columnIndex === this.columnNull) ||
+        (rowIndex !== this.rowNull && columnIndex !== this.columnNull)
+      ) {
         return false;
       } else {
         if (rowIndex === this.rowNull) {
@@ -110,11 +139,16 @@ export default {
 button {
   margin: 10px;
 }
-input {
+.zwipe .row {
+  display: flex;
+}
+.zwipe .tile {
   width: 64px;
-  line-height: 64px;
-  text-align: center;
-  font-size: 25px;
-  font-weight: bold;
+  height: 64px;
+  cursor: pointer;
+  outline: 1px solid rgba(255,255,255,0.5);
+  background-image: url("/cat-320x320.jpg");
+  background-position: calc(-64px * var(--tileColumn))
+    calc(-64px * var(--tileRow));
 }
 </style>
