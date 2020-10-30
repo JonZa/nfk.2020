@@ -8,6 +8,7 @@
           type="text"
           :value="tilesColumn"
           :key="columnIndex"
+          readonly
           v-on:click="clickTile(rowIndex, columnIndex)"
         />
       </template>
