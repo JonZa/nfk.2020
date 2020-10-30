@@ -2,7 +2,7 @@
   <div>
     <app-masthead></app-masthead>
     <div class="posts">
-      <main>
+      <!-- <main>
         <div class="post" v-for="post in sortedPosts" :key="post.id">
           <h3>
             <a :href="`blog/${post.slug}`">{{ post.title.rendered }}</a>
@@ -27,7 +27,7 @@
             </li>
           </ul>
         </div>
-      </aside>
+      </aside> -->
     </div>
   </div>
 </template>

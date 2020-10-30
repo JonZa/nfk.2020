@@ -1,13 +1,19 @@
 <template>
   <div class="nav">
     <ul>
-      <li>
+      <!-- <li>
         <nuxt-link exact to="/">
           <app-icon></app-icon>nfk.st
         </nuxt-link>
       </li>
       <li>
+        <VueButton label="Well fuck" size="large"></VueButton>
+      </li>
+      <li>
         <nuxt-link to="/about">About</nuxt-link>
+      </li> -->
+      <li>
+        <nuxt-link to="/zwipe">Zwipe</nuxt-link>
       </li>
     </ul>
   </div>
@@ -15,10 +21,12 @@
 
 <script>
 import AppIcon from "@/components/AppIcon.vue";
+import VueButton from "@/stories/Button.vue";
 
 export default {
   components: {
-    AppIcon
+    AppIcon,
+    VueButton
   }
 };
 </script>
