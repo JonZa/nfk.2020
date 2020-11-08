@@ -1,7 +1,7 @@
 <template>
   <div class="nav">
     <ul>
-      <!-- <li>
+      <li>
         <nuxt-link exact to="/">
           <app-icon></app-icon>nfk.st
         </nuxt-link>
@@ -11,7 +11,7 @@
       </li>
       <li>
         <nuxt-link to="/about">About</nuxt-link>
-      </li> -->
+      </li>
       <li>
         <nuxt-link to="/zwipe">Zwipe</nuxt-link>
       </li>
