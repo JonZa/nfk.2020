@@ -1,7 +1,7 @@
 <template>
 	<div
 		class="tile"
-		@click="$emit('click-tile')"
+		@mousedown="$emit('click-tile')"
 		:style="{
 			'--currentRow': styles.currentRow,
 			'--currentColumn': styles.currentColumn,
@@ -30,10 +30,10 @@ export default {
 		inset -1px -1px 2px rgba(0, 0, 0, 0.25);
 	border-radius: 4px;
 	outline-offset: -1px;
-	width: 64px;
-	height: 64px;
+	width: 80px;
+	height: 80px;
 	cursor: pointer;
-	background-image: url('/cat-320x320.jpg');
+	background-image: url('/el-cap.png');
 	background-repeat: no-repeat;
 	position: absolute;
 	top: 0;
@@ -42,11 +42,11 @@ export default {
 	--startRow: 0;
 	--currentColumn: 0;
 	--currentRow: 0;
-	background-position: calc(-1 * 64px * var(--startColumn))
-		calc(-1 * 64px * var(--startRow));
+	background-position: calc(-1 * 80px * var(--startColumn))
+		calc(-1 * 80px * var(--startRow));
 	transform: translate(
-		calc(64px * var(--currentColumn)),
-		calc(64px * var(--currentRow))
+		calc(80px * var(--currentColumn)),
+		calc(80px * var(--currentRow))
 	);
 	transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 	&.blank {

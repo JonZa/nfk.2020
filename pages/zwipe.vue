@@ -35,8 +35,8 @@ export default {
 	},
 	data() {
 		return {
-			columns: 5,
-			rows: 5,
+			columns: 4,
+			rows: 4,
 			blankColumn: 0,
 			blankRow: 0,
 			tilesArray: []
