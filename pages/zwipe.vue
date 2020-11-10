@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<button v-on:click="shuffleTiles">Shuffle</button>
+		<button v-on:click="shuffleTiles(tilesArray)">Shuffle</button>
 		<div
 			class="zwipe"
 			:style="{
@@ -8,17 +8,17 @@
 				'--rows': this.rows
 			}"
 		>
-			<template v-for="(tilesRow, rowIndex) in tilesArray">
+			<template v-for="(row, i) in rows">
 				<Tile
-					v-for="(tile, columnIndex) in tilesRow"
-					:key="'row-' + rowIndex + '-column-' + columnIndex"
-					@click-tile="clickTile(rowIndex, columnIndex)"
-					:class="{ blank: tile.isBlank }"
+					v-for="(column, j) in columns"
+					:key="'row-' + row + '-column-' + column"
+					@click-tile="clickTile(tilesArray[i * rows + j])"
+					:class="{ blank: tilesArray[i * rows + j].isBlank }"
 					v-bind:styles="{
-						positionRow: tile.positionRow,
-						positionColumn: tile.positionColumn,
-						backgroundRow: tile.backgroundRow,
-						backgroundColumn: tile.backgroundColumn
+						currentRow: tilesArray[i * rows + j].currentRow,
+						currentColumn: tilesArray[i * rows + j].currentColumn,
+						startRow: tilesArray[i * rows + j].startRow,
+						startColumn: tilesArray[i * rows + j].startColumn
 					}"
 				/>
 			</template>
@@ -37,152 +37,125 @@ export default {
 		return {
 			columns: 5,
 			rows: 5,
-			columnBlank: 0,
-			rowBlank: 0,
-			addressArray: [],
+			blankColumn: 0,
+			blankRow: 0,
 			tilesArray: []
 		};
 	},
+	beforeCreate() {
+		console.log('beforeCreate');
+		console.log(this.columns);
+	},
+	mounted() {
+		console.log('mounted');
+	},
 	created() {
-		this.createTiles();
-		// this.shuffleTiles();
+		console.log('created');
+		this.tilesArray = this.shuffleTiles(this.createTiles());
 	},
 	methods: {
 		createTiles() {
-			console.log('createTiles');
-
-			let tilesArrayCopy = [];
-			let addressArrayCopy = [];
+			let tiles = [];
 			for (let i = 0; i < this.rows; i++) {
-				tilesArrayCopy.push([]);
-				addressArrayCopy.push([]);
 				for (let j = 0; j < this.columns; j++) {
 					let isBlank = i === this.rows - 1 && j === this.columns - 1;
-					tilesArrayCopy[i].push({
-						positionRow: i,
-						positionColumn: j,
-						backgroundRow: !isBlank ? i : -1,
-						backgroundColumn: !isBlank ? j : -1,
+					tiles.push({
+						currentRow: i,
+						currentColumn: j,
+						startRow: !isBlank ? i : -1,
+						startColumn: !isBlank ? j : -1,
 						isBlank: isBlank
-					});
-					addressArrayCopy[i].push({
-						rowIndex: i,
-						columnIndex: j
 					});
 				}
 			}
-
-			this.rowBlank = this.rows - 1;
-			this.columnBlank = this.columns - 1;
-
-			this.addressArray = addressArrayCopy;
-			this.tilesArray = tilesArrayCopy;
-			return true;
+			this.blankRow = this.rows - 1;
+			this.blankColumn = this.columns - 1;
+			return tiles;
 		},
-		clickTile(rowIndex, columnIndex) {
-			let correctRow = this.addressArray[rowIndex][columnIndex]['rowIndex'] === this.rowBlank;
-			let correctColumn = this.addressArray[rowIndex][columnIndex]['columnIndex'] === this.columnBlank;
+		clickTile(target) {
+			let currentRow = target.currentRow;
+			let currentColumn = target.currentColumn;
+			let correctRow = currentRow === this.blankRow;
+			let correctColumn = currentColumn === this.blankColumn;
+
 			if (!correctRow && !correctColumn) {
 				return false;
 			} else if (correctRow && correctColumn) {
-				alert('user is sus vote them out');
+				alert('user is sus vote him out');
 				return false;
 			} else if (correctRow) {
-				console.log('woo row');
-				if (columnIndex > this.columnBlank) {
-					for (let i = this.columnBlank + 1; i <= columnIndex; i++) {
-						const thisTile = this.tilesArray[rowIndex][i];
-						this.$set(this.tilesArray[rowIndex], i - 1, thisTile);
-					}
-				} else {
-					for (let i = this.columnBlank - 1; i >= columnIndex; i--) {
-						const thisTile = this.tilesArray[rowIndex][i];
-						this.$set(this.tilesArray[rowIndex], i + 1, thisTile);
-					}
-				}
-			} else if (correctColumn) {
-				console.log('woo column');
-				if (rowIndex > this.rowBlank) {
-					for (let i = this.rowBlank + 1; i <= rowIndex; i++) {
-						const thisTile = this.tilesArray[i][columnIndex];
-						this.$set(this.tilesArray[i - 1], columnIndex, thisTile);
-					}
-				} else {
-					for (let i = this.rowBlank - 1; i >= rowIndex; i--) {
-						const thisTile = this.tilesArray[i][columnIndex];
-						this.$set(this.tilesArray[i + 1], columnIndex, thisTile);
-					}
-				}
-			}
-			this.rowBlank = rowIndex;
-			this.columnBlank = columnIndex;
-			// return false;
-			// if ((rowIndex === this.rowBlank && columnIndex === this.columnBlank) || (rowIndex !== this.rowBlank && columnIndex !== this.columnBlank)) {
-			// 	console.log('null');
-			// 	return false;
-			// } else {
-			// 	if (rowIndex === this.rowBlank) {
-			// 		if (columnIndex > this.columnBlank) {
-			// 			for (let i = this.columnBlank + 1; i <= columnIndex; i++) {
-			// 				const thisTile = this.tilesArray[rowIndex][i];
-			// 				this.$set(this.tilesArray[rowIndex], i - 1, thisTile);
-			// 			}
-			// 		} else {
-			// 			for (let i = this.columnBlank - 1; i >= columnIndex; i--) {
-			// 				const thisTile = this.tilesArray[rowIndex][i];
-			// 				this.$set(this.tilesArray[rowIndex], i + 1, thisTile);
-			// 			}
-			// 		}
-			// 	}
-			// 	if (columnIndex === this.columnBlank) {
-			// 		if (rowIndex > this.rowBlank) {
-			// 			for (let i = this.rowBlank + 1; i <= rowIndex; i++) {
-			// 				const thisTile = this.tilesArray[i][columnIndex];
-			// 				this.$set(this.tilesArray[i - 1], columnIndex, thisTile);
-			// 			}
-			// 		} else {
-			// 			for (let i = this.rowBlank - 1; i >= rowIndex; i--) {
-			// 				const thisTile = this.tilesArray[i][columnIndex];
-			// 				this.$set(this.tilesArray[i + 1], columnIndex, thisTile);
-			// 			}
-			// 		}
-			// 	}
-			// 	this.$set(this.tilesArray[rowIndex], columnIndex, null);
-			// 	this.rowBlank = rowIndex;
-			// 	this.columnBlank = columnIndex;
-			// }
-		},
-		shuffleTiles() {
-			console.log('shuffleTiles');
-			var tilesArrayCopy = JSON.parse(JSON.stringify(this.tilesArray));
-			tilesArrayCopy.forEach((row, rowIndex) => {
-				row.forEach((tile, columnIndex) => {
-					let newRowIndex = Math.floor(Math.random() * this.rows);
-					let newColumnIndex = Math.floor(Math.random() * this.columns);
-
-					let newTile = JSON.parse(JSON.stringify(tilesArrayCopy[newRowIndex][newColumnIndex]));
-
-					this.$set(this.tilesArray[newRowIndex][newColumnIndex], 'positionRow', tile.positionRow);
-					tilesArrayCopy[newRowIndex][newColumnIndex].positionRow = tile.positionRow;
-					this.$set(this.tilesArray[newRowIndex][newColumnIndex], 'positionColumn', tile.positionColumn);
-					tilesArrayCopy[newRowIndex][newColumnIndex].positionColumn = tile.positionColumn;
-
-					this.$set(this.tilesArray[rowIndex][columnIndex], 'positionRow', newTile.positionRow);
-					tilesArrayCopy[rowIndex][columnIndex].positionRow = newTile.positionRow;
-					this.$set(this.tilesArray[rowIndex][columnIndex], 'positionColumn', newTile.positionColumn);
-					tilesArrayCopy[rowIndex][columnIndex].positionColumn = newTile.positionColumn;
-
-					if (tile.isBlank) {
-						this.rowBlank = tile.positionRow;
-						this.columnBlank = tile.positionColumn;
-					} else if (newTile.isBlank) {
-						this.rowBlank = newTile.positionRow;
-						this.columnBlank = newTile.positionColumn;
-					}
-
-					[this.addressArray[rowIndex][columnIndex], this.addressArray[newRowIndex][newColumnIndex]] = [this.addressArray[newRowIndex][newColumnIndex], this.addressArray[rowIndex][columnIndex]];
+				let blankTile = this.tilesArray.filter(function(el) {
+					return el.startColumn < 0;
 				});
+				if (currentColumn > this.blankColumn) {
+					let relevantTiles = this.tilesArray.filter(function(el) {
+						return el.currentColumn > this.blankColumn && el.currentColumn <= currentColumn && el.currentRow === currentRow;
+					}, this);
+					relevantTiles.forEach(tile => {
+						tile.currentColumn = tile.currentColumn - 1;
+					});
+				} else if (currentColumn < this.blankColumn) {
+					let relevantTiles = this.tilesArray.filter(function(el) {
+						return el.currentColumn < this.blankColumn && el.currentColumn >= currentColumn && el.currentRow === currentRow;
+					}, this);
+					relevantTiles.forEach(tile => {
+						tile.currentColumn = tile.currentColumn + 1;
+					});
+				}
+				blankTile[0].currentColumn = currentColumn;
+			} else if (correctColumn) {
+				let blankTile = this.tilesArray.filter(function(el) {
+					return el.startRow < 0;
+				});
+				if (currentRow > this.blankRow) {
+					let relevantTiles = this.tilesArray.filter(function(el) {
+						return el.currentRow > this.blankRow && el.currentRow <= currentRow && el.currentColumn === currentColumn;
+					}, this);
+					relevantTiles.forEach(tile => {
+						tile.currentRow = tile.currentRow - 1;
+					});
+				} else if (currentRow < this.blankRow) {
+					let relevantTiles = this.tilesArray.filter(function(el) {
+						return el.currentRow < this.blankRow && el.currentRow >= currentRow && el.currentColumn === currentColumn;
+					}, this);
+					relevantTiles.forEach(tile => {
+						tile.currentRow = tile.currentRow + 1;
+					});
+				}
+				blankTile[0].currentRow = currentRow;
+			}
+
+			this.blankRow = currentRow;
+			this.blankColumn = currentColumn;
+		},
+		shuffleTiles(tiles) {
+			tiles.forEach((tile, index) => {
+				let randomTile = tiles[Math.floor(Math.random() * this.rows * this.columns)];
+
+				[tile.currentRow, randomTile.currentRow] = [randomTile.currentRow, tile.currentRow];
+				[tile.currentColumn, randomTile.currentColumn] = [randomTile.currentColumn, tile.currentColumn];
+
+				// let newTile = JSON.parse(JSON.stringify(tilesArrayCopy[newCurrentRow][newCurrentColumn]));
+
+				// this.$set(this.tilesArray[newCurrentRow][newCurrentColumn], 'currentRow', tile.currentRow);
+				// tilesArrayCopy[newCurrentRow][newCurrentColumn].currentRow = tile.currentRow;
+				// this.$set(this.tilesArray[newCurrentRow][newCurrentColumn], 'currentColumn', tile.currentColumn);
+				// tilesArrayCopy[newCurrentRow][newCurrentColumn].currentColumn = tile.currentColumn;
+
+				// this.$set(this.tilesArray[rowIndex][columnIndex], 'currentRow', newTile.currentRow);
+				// tilesArrayCopy[rowIndex][columnIndex].currentRow = newTile.currentRow;
+				// this.$set(this.tilesArray[rowIndex][columnIndex], 'currentColumn', newTile.currentColumn);
+				// tilesArrayCopy[rowIndex][columnIndex].currentColumn = newTile.currentColumn;
+
+				if (tile.isBlank) {
+					this.blankRow = tile.currentRow;
+					this.blankColumn = tile.currentColumn;
+				} else if (randomTile.isBlank) {
+					this.blankRow = randomTile.currentRow;
+					this.blankColumn = randomTile.currentColumn;
+				}
 			});
+			return tiles;
 		}
 	}
 };

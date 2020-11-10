@@ -3,10 +3,10 @@
 		class="tile"
 		@click="$emit('click-tile')"
 		:style="{
-			'--position-row': styles.positionRow,
-			'--position-column': styles.positionColumn,
-			'--background-row': styles.backgroundRow,
-			'--background-column': styles.backgroundColumn
+			'--currentRow': styles.currentRow,
+			'--currentColumn': styles.currentColumn,
+			'--startRow': styles.startRow,
+			'--startColumn': styles.startColumn
 		}"
 	/>
 </template>
@@ -15,10 +15,10 @@
 export default {
 	props: {
 		styles: {
-			positionRow: Number,
-			positionColumn: Number,
-			backgroundRow: Number,
-			backgroundColumn: Number
+			currentRow: Number,
+			currentColumn: Number,
+			startRow: Number,
+			startColumn: Number
 		}
 	}
 };
@@ -30,25 +30,23 @@ export default {
 		inset -1px -1px 2px rgba(0, 0, 0, 0.25);
 	border-radius: 4px;
 	outline-offset: -1px;
-	--width: calc(100% / var(--columns));
-	--height: calc(100% / var(--rows));
-	width: var(--width);
-	height: var(--height);
+	width: 64px;
+	height: 64px;
 	cursor: pointer;
 	background-image: url('/cat-320x320.jpg');
 	background-repeat: no-repeat;
 	position: absolute;
 	top: 0;
 	left: 0;
-	--background-column: 0;
-	--background-row: 0;
-	--position-column: 0;
-	--position-row: 0;
-	background-position: calc(-1 * 64px * var(--background-column))
-		calc(-1 * 64px * var(--background-row));
+	--startColumn: 0;
+	--startRow: 0;
+	--currentColumn: 0;
+	--currentRow: 0;
+	background-position: calc(-1 * 64px * var(--startColumn))
+		calc(-1 * 64px * var(--startRow));
 	transform: translate(
-		calc(64px * var(--position-column)),
-		calc(64px * var(--position-row))
+		calc(64px * var(--currentColumn)),
+		calc(64px * var(--currentRow))
 	);
 	transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 	&.blank {
