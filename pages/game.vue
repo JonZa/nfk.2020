@@ -43,22 +43,19 @@ export default {
 		};
 	},
 	beforeCreate() {
-		console.log('beforeCreate');
 		console.log(this.columns);
 	},
 	mounted() {
-		console.log('mounted');
 	},
 	created() {
-		console.log('created');
-		this.tilesArray = this.shuffleTiles(this.createTiles());
+		this.tilesArray = this.createTiles();
 	},
 	methods: {
 		createTiles() {
 			let tiles = [];
 			for (let i = 0; i < this.rows; i++) {
 				for (let j = 0; j < this.columns; j++) {
-					let isBlank = i === this.rows - 1 && j === this.columns - 1;
+					let isBlank = i === 0 && j === this.columns - 1;
 					tiles.push({
 						currentRow: i,
 						currentColumn: j,
@@ -163,7 +160,6 @@ export default {
 
 <style lang="scss" scoped>
 .zwipe {
-	background: #ffffff;
 	width: 320px;
 	height: 320px;
 	margin: 0 auto;
@@ -171,6 +167,5 @@ export default {
 }
 button {
 	display: block;
-	margin: 10px auto;
 }
 </style>

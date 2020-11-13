@@ -1,30 +1,22 @@
-@mixin fluid-type($properties, $min-vw, $max-vw, $min-value, $max-value) {
-  @each $property in $properties {
-    #{$property}: $min-value;
-  }
+$a-tags: 'a, a:active, a:hover, a:visited';
+$a-tags-hover: 'a:active, a:hover, a.active';
 
-  @media (min-width: $min-vw) {
-    @each $property in $properties {
-      #{$property}: calc(
-        #{$min-value} +
-          #{strip-unit($max-value - $min-value)} *
-          (100vw - #{$min-vw}) /
-          #{strip-unit($max-vw - $min-vw)}
-      );
-    }
-  }
-
-  @media (min-width: $max-vw) {
-    @each $property in $properties {
-      #{$property}: $max-value;
-    }
-  }
+@mixin background-image($file, $type, $width, $height) {
+	background-image: url($file+'.'+$type);
+	background-size: $width $height;
+	@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+		& {
+			background-image: url($file+'@2x.'+$type);
+		}
+	}
 }
 
-@function strip-unit($number) {
-  @if type-of($number) == "number" and not unitless($number) {
-    @return $number / ($number * 0 + 1);
-  }
+@mixin bp($point) {
+	$bp-desktop: '(min-width: 1024px)';
 
-  @return $number;
+	@if $point == desktop {
+		@media #{$bp-desktop} {
+			@content;
+		}
+	}
 }
