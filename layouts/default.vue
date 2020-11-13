@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<nuxt />
+		<nuxt class="content" />
 		<app-nav />
 	</div>
 </template>
@@ -26,7 +26,7 @@ export default {
 	padding: 0;
 }
 html {
-	font-family: sans-serif;
+	font-family: 'Alegreya', serif;
 	font-size: 100%;
 	word-spacing: 1px;
 	box-sizing: border-box;
@@ -34,13 +34,13 @@ html {
 body {
 	background-color: #22222a;
 	background-repeat: no-repeat;
-	padding: 100px 35px;
+	padding: 100px 30px 20px 30px;
 	color: #fff;
 	&::after,
 	&::before {
 		display: block;
 		content: '';
-		position: absolute;
+		position: fixed;
 		top: 0;
 		left: 0;
 		right: 0;
@@ -81,25 +81,45 @@ h3,
 p {
 	margin-bottom: 15px;
 }
-p {
-	padding-bottom: 0;
+p,
+li {
 	font-size: 1.125rem;
 	line-height: 25px;
 	transform: translateY(-3px);
 	padding-top: 1px;
-	font-family: 'Alegreya';
+}
+.list {
+	&--plain {
+		list-style-type: none;
+	}
+}
+li {
+	margin-bottom: 5px;
 }
 
-#{$a-tags} {
-	color: #ff99cc;
-	text-decoration: underline;
-}
-#{$a-tags-hover} {
-	color: #ff99cc;
-	text-decoration: none;
+.content {
+	#{$a-tags} {
+		color: #ff99cc;
+		box-shadow: inset 0 -1px 0 #ff99cc;
+		text-decoration: none;
+		transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+	}
+	#{$a-tags-hover} {
+		color: #fff;
+		box-shadow: inset 0 -1px 0 #fff;
+	}
 }
 strong {
-	font-weight: normal;
+	font-weight: 500;
 	color: #95d2e4;
+}
+
+.icon {
+	height: 18px;
+	transform: translatey(3px);
+	margin-right: 5px;
+	path {
+		fill: #fff;
+	}
 }
 </style>

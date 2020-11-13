@@ -58,7 +58,7 @@ export default {
 		&::before {
 			display: block;
 			content: '';
-			position: absolute;
+			position: fixed;
 			right: 0;
 			bottom: 0;
 			width: 150px;
