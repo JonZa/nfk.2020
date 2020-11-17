@@ -1,7 +1,7 @@
 <template>
-	<div>
+	<div class="container" :class="navIsOpen ? 'container--nav-is-open' : ''">
 		<nuxt class="content" />
-		<app-nav />
+		<app-nav :navIsOpen="this.navIsOpen" @toggle-nav-is-open="toggleNavIsOpen" />
 	</div>
 </template>
 
@@ -9,15 +9,29 @@
 import AppNav from '~/components/AppNav.vue';
 
 export default {
+	data() {
+		return {
+			navIsOpen: false
+		};
+	},
 	components: {
 		AppNav
+	},
+	methods: {
+		toggleNavIsOpen() {
+			console.log(this.navIsOpen);
+			this.navIsOpen = !this.navIsOpen;
+			console.log(this.navIsOpen);
+		}
 	}
 };
 </script>
 
 <style lang="scss">
 @import '@/assets/mixins.scss';
-
+.open {
+	outline: 10px solid #f00;
+}
 *,
 *:before,
 *:after {
@@ -34,10 +48,13 @@ html {
 body {
 	background-color: #22222a;
 	background-repeat: no-repeat;
-	padding: 100px 30px 20px 30px;
 	color: #fff;
+}
+.container {
+	padding: 100px 30px 20px 30px;
 	&::after,
 	&::before {
+		@include background-image('/me-mobile', jpg, 100%, auto, #22222a, transparent, 'to top');
 		display: block;
 		content: '';
 		position: fixed;
@@ -46,12 +63,20 @@ body {
 		right: 0;
 		padding-top: 56.25%;
 		z-index: -1;
-	}
-	&::before {
-		@include background-image('/me-mobile', 'jpg', 100%, auto);
+		@include bp(desktop) {
+			display: none;
+		}
 	}
 	&::after {
-		background: linear-gradient(to top, #22222a, transparent);
+		filter: hue-rotate(90deg);
+		clip: rect(0, 0, 0, 0);
+		opacity: 0;
+		transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+	}
+	&--nav-is-open::after {
+		opacity: 1;
+		left: -10px;
+		animation: glitch-anim 5s linear infinite alternate;
 	}
 }
 h1 {
@@ -61,6 +86,34 @@ h1 {
 	transform: translateY(-5px);
 	padding-top: 1px;
 	margin-bottom: 20px;
+	transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+	position: relative;
+	&:before,
+	&:after {
+		content: attr(title);
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+	}
+}
+@keyframes glitch-anim {
+	$steps: 10;
+	@for $i from 0 through $steps {
+		0% {
+			clip: rect(0, 0, 0, 0);
+		}
+		59% {
+			clip: rect(0, 0, 0, 0);
+		}
+		#{percentage(0.60 + $i*(0.30/$steps))} {
+			left: -10 + random(20) + px;
+			top: random(25) + px;
+			clip: rect(random(75) + px, 9999px, random(125) + px, 0);
+		}
+	}
 }
 h2 {
 	font-family: 'Nunito';
@@ -74,12 +127,16 @@ h3 {
 	font-size: 20px;
 	line-height: 25px;
 	transform: translateY(-3px);
-	padding-top: 1px;
 }
+h1,
 h2,
 h3,
-p {
+p,
+ul {
 	margin-bottom: 15px;
+}
+h2 {
+	padding-top: 10px;
 }
 p,
 li {
@@ -98,6 +155,12 @@ li {
 }
 
 .content {
+	transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+	transition-delay: 0.3s;
+	@at-root .container--nav-is-open & {
+		transition-delay: 0.15s;
+		transform: translatex(calc(-100% - 35px));
+	}
 	#{$a-tags} {
 		color: #ff99cc;
 		box-shadow: inset 0 -1px 0 #ff99cc;
@@ -110,16 +173,39 @@ li {
 	}
 }
 strong {
-	font-weight: 500;
+	font-weight: normal;
 	color: #95d2e4;
 }
 
 .icon {
-	height: 18px;
-	transform: translatey(3px);
-	margin-right: 5px;
+	&--big {
+		height: 54px;
+		@at-root .columns--icons & {
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+	}
+	&--inline {
+		height: 18px;
+		transform: translatey(3px);
+		margin-right: 5px;
+	}
 	path {
 		fill: #fff;
+	}
+}
+
+.columns {
+	display: flex;
+	.child {
+		flex: 1 1 50%;
+	}
+	&--icons {
+		.child {
+			position: relative;
+			padding-left: 80px;
+		}
 	}
 }
 </style>

@@ -1,12 +1,16 @@
 $a-tags: 'a, a:active, a:hover, a:visited';
 $a-tags-hover: 'a:active, a:hover, a.active';
 
-@mixin background-image($file, $type, $width, $height) {
-	background-image: url($file+'.'+$type);
+@mixin background-image($file, $type, $width, $height, $start: 0, $finish: 0, $direction: 0) {
+	$gradient: '';
+	@if $start {
+		$gradient: 'linear-gradient(#{$direction}, #{$start}, #{$finish}), ';
+	}
+	background-image: #{$gradient} url($file+'.'+$type);
 	background-size: $width $height;
 	@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
 		& {
-			background-image: url($file+'@2x.'+$type);
+			background-image: #{$gradient} url($file+'@2x.'+$type);
 		}
 	}
 }

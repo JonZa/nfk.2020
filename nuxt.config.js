@@ -27,10 +27,11 @@ export default {
     ],
     link: [
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com" },
       {
         rel: "stylesheet",
         href:
-          "https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500&family=Nunito:wght@900&display=swap"
+          "https://fonts.googleapis.com/css2?family=Alegreya:wght@400&family=Nunito:wght@900&display=swap"
       }
     ]
   },

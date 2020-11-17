@@ -42,11 +42,6 @@ export default {
 			tilesArray: []
 		};
 	},
-	beforeCreate() {
-		console.log(this.columns);
-	},
-	mounted() {
-	},
 	created() {
 		this.tilesArray = this.createTiles();
 	},
@@ -158,7 +153,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .zwipe {
 	width: 320px;
 	height: 320px;

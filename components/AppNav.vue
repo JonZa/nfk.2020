@@ -1,9 +1,9 @@
 <template>
 	<nav class="nav__container">
-		<button class="nav__hamburger" type="button" @click="toggleOpen" :class="{ open: isOpen }"></button>
-		<ul class="nav__links" :class="{ 'nav__links--open': isOpen }" :style="{ '--children': links.length }">
+		<button class="nav__hamburger" type="button" @click="$emit('toggle-nav-is-open')"></button>
+		<ul class="nav__links" :class="navIsOpen ? 'nav__links--open' : ''" :style="{ '--children': links.length }">
 			<li v-for="(link, i) in links" :key="'link-' + i" :style="{ '--child-n': i + 1 }">
-				<nuxt-link :to="link.to">{{ link.title }}</nuxt-link>
+				<nuxt-link :to="link.to" @click.native="$emit('toggle-nav-is-open')">{{ link.title }}</nuxt-link>
 			</li>
 		</ul>
 	</nav>
@@ -11,6 +11,9 @@
 
 <script>
 export default {
+	props: {
+		navIsOpen: Boolean
+	},
 	data() {
 		return {
 			isOpen: false,
@@ -41,12 +44,6 @@ export default {
 				}
 			]
 		};
-	},
-	components: {},
-	methods: {
-		toggleOpen: function() {
-			this.isOpen = !this.isOpen;
-		}
 	}
 };
 </script>
