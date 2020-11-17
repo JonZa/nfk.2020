@@ -1,7 +1,7 @@
 $a-tags: 'a, a:active, a:hover, a:visited';
 $a-tags-hover: 'a:active, a:hover, a.active';
 
-@mixin background-image($file, $type, $width, $height, $start: 0, $finish: 0, $direction: 0) {
+@mixin background-image($file, $type, $width, $height, $start: null, $finish: null, $direction: null) {
 	$gradient: '';
 	@if $start {
 		$gradient: 'linear-gradient(#{$direction}, #{$start}, #{$finish}), ';
