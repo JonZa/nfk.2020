@@ -35,7 +35,12 @@ export default {
 	width: 80px;
 	height: 80px;
 	cursor: pointer;
-	@include background-image('/banksy', 'png', 320px, 320px);
+	// @include background-image('/banksy', 'png', 320px, 320px);
+	background-image: url('~@/static/banksy.jpg?resize&size=320&format=webp');
+	@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+		background-image: url('~@/static/banksy.jpg?resize&size=640&format=webp');
+		background-size: calc(var(--columns) * 100%);
+	}
 	background-repeat: no-repeat;
 	position: absolute;
 	top: 0;

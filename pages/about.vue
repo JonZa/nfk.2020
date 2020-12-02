@@ -10,12 +10,39 @@
 		<p>
 			Yeah, Javascript is cool, but have you tried writing less code and getting better results?
 		</p>
-		<p>
-			I love Javascript, but valuing HTML, mastering CSS, and <strong>understanding browsers</strong> means I spend less time writing slow, brittle, convoluted Javascript; more time writing lean, accessible, semantic HTML; and more time writing smooth, responsive, extensible CSS.</p>
+		<p>I love Javascript, but valuing HTML, mastering CSS, and <strong>understanding browsers</strong> means I spend less time writing slow, brittle, convoluted Javascript; more time writing lean, accessible, semantic HTML; and more time writing smooth, responsive, extensible CSS.</p>
 		<h2>
 			About this site
 		</h2>
 		<p>
+			<strong>This site is currently under construction.</strong> The immediate to-do list:
+		</p>
+		<ul>
+			<li>
+				Desktop stylesheet; currently site is mobile-only, but you can get a <a href="https://www.figma.com/file/1gpEBUItQnwJ6vTKqjQMwv/nfk.st?node-id=0%3A1" target="_blank" rel="noopener">sneak-peek preview of the desktop designs on Figma</a>
+			</li>
+			<li>
+				Content; definitely needs some fleshing out
+			</li>
+			<li>
+				Local storage; save the game-state for later
+			</li>
+		</ul>
+		<p>
+			The medium-term to-do list:
+		</p>
+		<ul>
+			<li>
+				Dynamic content; there's a WordPress backend that's not ready for prime-time
+			</li>
+			<li>
+				React; the site is built in Vue, but I'd like to build an identical site in React
+			</li>
+			<li>
+				Storybook pattern library; currently the atomic design emperor has no clothes
+			</li>
+		</ul>
+		<!-- <p>
 			I've built the site you're browsing using Vue. I've also built the same site using React.
 		</p>
 		<div class="columns columns--icons">
@@ -71,7 +98,7 @@
 		</div>
 		<p>
 			I'm using a headless WordPress CMS hosted on AWS, and content updates trigger a buildhook on Netlify that pulls the updated content and rebuilds a static site. Yay, JAMstack: better performance, higher security, easier scaling, more fun.
-		</p>
+		</p> -->
 	</div>
 </template>
 

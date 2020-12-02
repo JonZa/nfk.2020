@@ -1,8 +1,12 @@
 <template>
 	<div>
-		<button v-on:click="shuffleTiles(tilesArray)">Shuffle</button>
+		<h1>Game</h1>
+		<p>
+			Fun with reactive data, CSS custom properties, and transitions. Harder than it looks.
+		</p>
 		<div
 			class="zwipe"
+			:class="started ? 'zwipe--started' : ''"
 			:style="{
 				'--columns': this.columns,
 				'--rows': this.rows
@@ -22,6 +26,7 @@
 					}"
 				/>
 			</template>
+			<button v-on:click="start" class="zwipe__shuffle">Shuffle to Start</button>
 		</div>
 	</div>
 </template>
@@ -39,7 +44,8 @@ export default {
 			rows: 4,
 			blankColumn: 0,
 			blankRow: 0,
-			tilesArray: []
+			tilesArray: [],
+			started: false
 		};
 	},
 	created() {
@@ -60,7 +66,7 @@ export default {
 					});
 				}
 			}
-			this.blankRow = this.rows - 1;
+			this.blankRow = 0;
 			this.blankColumn = this.columns - 1;
 			return tiles;
 		},
@@ -120,24 +126,13 @@ export default {
 			this.blankRow = currentRow;
 			this.blankColumn = currentColumn;
 		},
-		shuffleTiles(tiles) {
+		start() {
+			let tiles = this.tilesArray;
 			tiles.forEach((tile, index) => {
 				let randomTile = tiles[Math.floor(Math.random() * this.rows * this.columns)];
 
 				[tile.currentRow, randomTile.currentRow] = [randomTile.currentRow, tile.currentRow];
 				[tile.currentColumn, randomTile.currentColumn] = [randomTile.currentColumn, tile.currentColumn];
-
-				// let newTile = JSON.parse(JSON.stringify(tilesArrayCopy[newCurrentRow][newCurrentColumn]));
-
-				// this.$set(this.tilesArray[newCurrentRow][newCurrentColumn], 'currentRow', tile.currentRow);
-				// tilesArrayCopy[newCurrentRow][newCurrentColumn].currentRow = tile.currentRow;
-				// this.$set(this.tilesArray[newCurrentRow][newCurrentColumn], 'currentColumn', tile.currentColumn);
-				// tilesArrayCopy[newCurrentRow][newCurrentColumn].currentColumn = tile.currentColumn;
-
-				// this.$set(this.tilesArray[rowIndex][columnIndex], 'currentRow', newTile.currentRow);
-				// tilesArrayCopy[rowIndex][columnIndex].currentRow = newTile.currentRow;
-				// this.$set(this.tilesArray[rowIndex][columnIndex], 'currentColumn', newTile.currentColumn);
-				// tilesArrayCopy[rowIndex][columnIndex].currentColumn = newTile.currentColumn;
 
 				if (tile.isBlank) {
 					this.blankRow = tile.currentRow;
@@ -147,18 +142,54 @@ export default {
 					this.blankColumn = randomTile.currentColumn;
 				}
 			});
-			return tiles;
+			this.started = true;
 		}
 	}
 };
 </script>
 
 <style lang="scss">
-.zwipe {
+$this: '.zwipe';
+#{$this} {
 	width: 320px;
 	height: 320px;
 	margin: 0 auto;
 	position: relative;
+	&__shuffle {
+		border: 0;
+		box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.75), inset -1px -1px 2px rgba(255, 255, 255, 0.75);
+		text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.75);
+		color: #22222a;
+		font-size: 1.5rem;
+		left: 50%;
+		top: 50%;
+		z-index: 2;
+		padding: 10px 20px;
+		border-radius: 4px;
+		z-index: 2;
+		position: absolute;
+		transform: translate(-50%, -50%);
+		background: linear-gradient(to top, lighten(#22222a, 50%), #fff 66%);
+	}
+	&::after {
+		background: linear-gradient(to bottom right, transparent, rgba(#22222a, 0.5) 25%, rgba(#22222a, 0.75) 50%, rgba(#22222a, 0.5) 75%, transparent);
+		display: block;
+		content: '';
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		z-index: 1;
+	}
+	&--started {
+		#{$this}__shuffle,
+		&::after {
+			transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+			opacity: 0;
+			pointer-events: none;
+		}
+	}
 }
 button {
 	display: block;

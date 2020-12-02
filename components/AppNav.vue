@@ -1,6 +1,6 @@
 <template>
-	<nav class="nav__container">
-		<button class="nav__hamburger" type="button" @click="$emit('toggle-nav-is-open')"></button>
+	<nav class="nav__container" :class="navIsOpen ? 'nav__container--open' : ''">
+		<button class="nav__hamburger" :class="navIsOpen ? 'nav__hamburger--open' : ''" type="button" @click="$emit('toggle-nav-is-open')"></button>
 		<ul class="nav__links" :class="navIsOpen ? 'nav__links--open' : ''" :style="{ '--children': links.length }">
 			<li v-for="(link, i) in links" :key="'link-' + i" :style="{ '--child-n': i + 1 }">
 				<nuxt-link :to="link.to" @click.native="$emit('toggle-nav-is-open')">{{ link.title }}</nuxt-link>
@@ -60,7 +60,14 @@ export default {
 			bottom: 0;
 			width: 150px;
 			height: 150px;
-			background-image: radial-gradient(circle at top left, transparent 70.5%, #ca2c92 100%);
+			transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+			background-image: radial-gradient(circle at top left, transparent 70.5%, #39687f 100%);
+			z-index: -1;
+		}
+		&--open {
+			&::before {
+				background-image: radial-gradient(circle at top left, transparent 70.5%, rgba(#ca2c92, 0.5) 100%);
+			}
 		}
 	}
 	&__links {
@@ -133,6 +140,7 @@ export default {
 		}
 	}
 	&__hamburger {
+		outline: 0;
 		position: fixed;
 		border: 0;
 		background: #fff;
@@ -142,6 +150,39 @@ export default {
 		bottom: 15px;
 		right: 15px;
 		z-index: 0;
+		&::before,
+		&::after {
+			display: block;
+			content: '';
+			position: absolute;
+			left: 50%;
+			transform-origin: center;
+			background: transparent;
+			width: 20px;
+			height: 9px;
+			transform: translate(-50%, calc(-50% + 3px));
+			transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+			border-top: 3px solid #38667e;
+			border-bottom: 3px solid #38667e;
+		}
+		&::before {
+			transform: translate(-50%, calc(-50% - 3px));
+		}
+		&--open {
+			&::before,
+			&::after {
+				background: rgba(#ca2c92, 0.5);
+				border-radius: 10px;
+				border-color: transparent;
+				height: 5px;
+			}
+			&::before {
+				transform: translate(-50%, -50%) rotate(135deg) scale(1.2);
+			}
+			&::after {
+				transform: translate(-50%, -50%) rotate(45deg) scale(1.2);
+			}
+		}
 	}
 }
 </style>

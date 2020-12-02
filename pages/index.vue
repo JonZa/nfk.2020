@@ -9,8 +9,10 @@
 			I've been described as:<br />
 			<strong>“a frontend development genius”</strong><br class="soft" />
 			by a head of engineering,<br />
+			<strong>“fantastic to work with”</strong><br class="soft" />
+			by a client,<br />
 			<strong>“great at simplifying complex problems”</strong><br class="soft" />
-			by a client, and<br />
+			by a colleague, and<br />
 			<strong>“the best manager I have worked for”</strong><br class="soft" />
 			by a teammate.
 		</p>
@@ -19,8 +21,9 @@
 			and I'm looking for work.
 		</p>
 		<p>
-			Email me at <a href="mailto:jon.muller@gmail.com">jon.muller@gmail.com</a><br class="soft" />
-			or <nuxt-link to="/game">read more</nuxt-link> about me.
+			You can <a href="JonMuller-min.pdf" download>download my resume</a>,<br class="soft" />
+			email me at <a href="mailto:jon.muller@gmail.com">jon.muller@gmail.com</a><br class="soft" />
+			or <nuxt-link to="/about">read more</nuxt-link> about me.
 		</p>
 		<!-- <main>
 			<div class="post" v-for="post in sortedPosts" :key="post.id">

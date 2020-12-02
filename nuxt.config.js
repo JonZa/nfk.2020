@@ -26,7 +26,7 @@ export default {
       },
     ],
     link: [
-      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      { rel: "icon", type: "image/x-icon", href: "/heart.svg" },
       { rel: "preconnect", href: "https://fonts.gstatic.com" },
       {
         rel: "stylesheet",
@@ -38,7 +38,7 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: "#fff" },
+  loading: false,
   /*
    ** Global CSS
    */
@@ -57,7 +57,12 @@ export default {
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: [],
+  buildModules: [
+    '@aceforth/nuxt-optimized-images',
+  ],
+  optimizedImages: {
+    optimizeImages: true
+  },
   /*
    ** Build configuration
    */
