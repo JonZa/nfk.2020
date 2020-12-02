@@ -37,9 +37,7 @@ export default {
 	},
 	methods: {
 		toggleNavIsOpen() {
-			console.log(this.navIsOpen);
 			this.navIsOpen = !this.navIsOpen;
-			console.log(this.navIsOpen);
 		}
 	}
 };

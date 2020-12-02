@@ -45,7 +45,7 @@
 		<blockquote>
 			<picture class="blockquote__person">
 				<source srcset="~/static/people__joe.jpg?resize&size=114&format=webp 1x, ~/static/people__joe.jpg?resize&size=228&format=webp 2x" type="image/webp" />
-				<img src="~/static/people__no-pic.png?resize&size=114&format=jpg" type="image/jpeg" ” />
+				<img src="~/static/people__no-pic.png?resize&size=114&format=jpg" type="image/jpeg" />
 			</picture>
 			<p>Jon is extremely well respected by the web development community and the designers and developers that he has worked with. I recommend Jon highly and have no hesitation in endorsing Jon as a domain expert who has a very unique and highly sought after set of skills; and he is great to work with.</p>
 			<cite class="blockquote__citation">Joe da Silva, CEO at FormFunction Digital Consultants</cite>
