@@ -4,7 +4,7 @@
 			Contact me
 		</h1>
 		<p>Email me at <a href="mailto:jon.muller@gmail.com">jon.muller@gmail.com</a> or call me on <a href="tel:0466213376">0466&nbsp;213&nbsp;376</a>.</p>
-		<form name="contact" method="POST" data-netlify="true" @submit.prevent="handleSubmit">
+		<form name="contact" method="POST" data-netlify="true">
 			<p>
 				<label>Your Name: <input type="text" name="name"/></label>
 			</p>
@@ -22,30 +22,30 @@
 </template>
 
 <script>
-export default {
-	methods: {
-		encode(data) {
-			return Object.keys(data)
-				.map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
-				.join('&');
-		},
-		handleSubmit(e) {
-			fetch('/', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-				body: this.encode({
-					...this.form
-				})
-			})
-				.then(() => {
-					alert('ok good');
-				})
-				.catch(() => {
-					alert('oh no bad');
-				});
-		}
-	}
-};
+// export default {
+// 	methods: {
+// 		encode(data) {
+// 			return Object.keys(data)
+// 				.map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+// 				.join('&');
+// 		},
+// 		handleSubmit(e) {
+// 			fetch('/', {
+// 				method: 'POST',
+// 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+// 				body: this.encode({
+// 					...this.form
+// 				})
+// 			})
+// 				.then(() => {
+// 					alert('ok good');
+// 				})
+// 				.catch(() => {
+// 					alert('oh no bad');
+// 				});
+// 		}
+// 	}
+// };
 </script>
 
 <style lang="scss"></style>
