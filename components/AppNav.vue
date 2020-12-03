@@ -1,6 +1,6 @@
 <template>
 	<nav class="nav__container" :class="navIsOpen ? 'nav__container--open' : ''">
-		<button class="nav__hamburger" :class="navIsOpen ? 'nav__hamburger--open' : ''" type="button" @click="$emit('toggle-nav-is-open')"></button>
+		<button class="nav__hamburger" :class="navIsOpen ? 'nav__hamburger--open' : ''" type="button" @click="$emit('toggle-nav-is-open')" aria-label="Show navigation"></button>
 		<ul class="nav__links" :class="navIsOpen ? 'nav__links--open' : ''" :style="{ '--children': links.length }">
 			<li v-for="(link, i) in links" :key="'link-' + i" :style="{ '--child-n': i + 1 }">
 				<nuxt-link :to="link.to" @click.native="$emit('toggle-nav-is-open')">{{ link.title }}</nuxt-link>

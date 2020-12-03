@@ -48,29 +48,21 @@ export default {
 @import '@/assets/variables.scss';
 /* nunito-900 - latin */
 @font-face {
-  font-family: 'Nunito';
-  font-style: normal;
-  font-weight: 900;
-  src: url('~@/static/fonts/nunito-v16-latin-900.eot'); /* IE9 Compat Modes */
-  src: local(''),
-       url('~@/static/fonts/nunito-v16-latin-900.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('~@/static/fonts/nunito-v16-latin-900.woff2') format('woff2'), /* Super Modern Browsers */
-       url('~@/static/fonts/nunito-v16-latin-900.woff') format('woff'), /* Modern Browsers */
-       url('~@/static/fonts/nunito-v16-latin-900.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('~@/static/fonts/nunito-v16-latin-900.svg#Nunito') format('svg'); /* Legacy iOS */
+	font-family: 'Nunito';
+	font-style: normal;
+	font-weight: 900;
+	font-display: swap;
+	src: url('~@/static/fonts/nunito-v16-latin-900.eot'); /* IE9 Compat Modes */
+	src: local(''), url('~@/static/fonts/nunito-v16-latin-900.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('~@/static/fonts/nunito-v16-latin-900.woff2') format('woff2'), /* Super Modern Browsers */ url('~@/static/fonts/nunito-v16-latin-900.woff') format('woff'), /* Modern Browsers */ url('~@/static/fonts/nunito-v16-latin-900.ttf') format('truetype'), /* Safari, Android, iOS */ url('~@/static/fonts/nunito-v16-latin-900.svg#Nunito') format('svg'); /* Legacy iOS */
 }
 /* alegreya-regular - latin */
 @font-face {
-  font-family: 'Alegreya';
-  font-style: normal;
-  font-weight: 400;
-  src: url('~@/static/fonts/alegreya-v16-latin-regular.eot'); /* IE9 Compat Modes */
-  src: local(''),
-       url('~@/static/fonts/alegreya-v16-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('~@/static/fonts/alegreya-v16-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
-       url('~@/static/fonts/alegreya-v16-latin-regular.woff') format('woff'), /* Modern Browsers */
-       url('~@/static/fonts/alegreya-v16-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('~@/static/fonts/alegreya-v16-latin-regular.svg#Alegreya') format('svg'); /* Legacy iOS */
+	font-family: 'Alegreya';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('~@/static/fonts/alegreya-v16-latin-regular.eot'); /* IE9 Compat Modes */
+	src: local(''), url('~@/static/fonts/alegreya-v16-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('~@/static/fonts/alegreya-v16-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */ url('~@/static/fonts/alegreya-v16-latin-regular.woff') format('woff'), /* Modern Browsers */ url('~@/static/fonts/alegreya-v16-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */ url('~@/static/fonts/alegreya-v16-latin-regular.svg#Alegreya') format('svg'); /* Legacy iOS */
 }
 *,
 *:before,
@@ -107,6 +99,7 @@ body {
 		padding-top: 56.25%;
 		z-index: -1;
 		background-image: linear-gradient(to top, $shark, transparent), url('~@/static/me.jpg?resize&size=480&format=webp');
+		background-size: cover;
 		@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
 			background-image: linear-gradient(to top, $shark, transparent), url('~@/static/me.jpg?resize&size=960&format=webp');
 		}

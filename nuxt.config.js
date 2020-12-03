@@ -14,7 +14,10 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: process.env.npm_package_name || "",
+    htmlAttrs: {
+      lang: 'en'
+    },
+    title: "Jon Muller | User interface developer",
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
