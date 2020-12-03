@@ -43,7 +43,16 @@ export default {
 	 */
 	plugins: ['~/plugins/posts.server.js', '~/plugins/tags.server.js', '~/plugins/dateformat.js'],
 	generate: {
-		routes: dynamicRoutes
+		// routes: dynamicRoutes
+		// routes: function() {
+		// 	const fs = require('fs');
+		// 	return fs.readdirSync('./pages').map(file => {
+		// 	  return {
+		// 		route: `/${file}`,
+		// 		payload: require(`./pages/${file}`)
+		// 	  }
+		// 	})
+		//   }
 	},
 	/*
 	 ** Nuxt.js dev-modules
