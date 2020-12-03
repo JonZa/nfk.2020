@@ -1,13 +1,14 @@
 import axios from 'axios';
 let dynamicRoutes = () => {
-	const routes = axios.get('http://54.206.97.106/wp-json/wp/v2/posts?page=1&per_page=20').then(res => {
-		return res.data.map(post => `/blog/${post.slug}`);
-	});
-	console.log(routes);
+	// const routes = axios.get('http://54.206.97.106/wp-json/wp/v2/posts?page=1&per_page=20').then(res => {
+	// 	return res.data.map(post => `/blog/${post.slug}`);
+	// });
+	// console.log(routes);
 	return routes;
 };
 
 export default {
+	target: 'static',
 	/*
 	 ** Headers of the page
 	 */
