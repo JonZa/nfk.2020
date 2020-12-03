@@ -142,6 +142,7 @@ export default {};
 </script>
 
 <style lang="scss">
+@import '@/assets/variables.scss';
 .blockquote {
 	&__person {
 		background: #fff;
@@ -151,7 +152,7 @@ export default {};
 		float: right;
 		width: 20%;
 		margin: 2px 0 15px 15px;
-		border: 1px solid #95d2e4;
+		border: 1px solid $cornflower;
 		position: relative;
 		source,
 		img {

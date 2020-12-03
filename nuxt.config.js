@@ -32,7 +32,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: ["~/assets/mixins.scss"],
+  css: ["~/assets/mixins.scss","~/assets/variables.scss"],
   /*
    ** Plugins to load before mounting the App
    */

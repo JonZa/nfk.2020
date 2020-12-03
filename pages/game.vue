@@ -149,6 +149,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/assets/variables.scss';
 $this: '.zwipe';
 #{$this} {
 	width: 320px;
@@ -159,7 +160,7 @@ $this: '.zwipe';
 		border: 0;
 		box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.75), inset -1px -1px 2px rgba(255, 255, 255, 0.75);
 		text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.75);
-		color: #22222a;
+		color: $shark;
 		font-size: 1.5rem;
 		left: 50%;
 		top: 50%;
@@ -169,10 +170,10 @@ $this: '.zwipe';
 		z-index: 2;
 		position: absolute;
 		transform: translate(-50%, -50%);
-		background: linear-gradient(to top, lighten(#22222a, 50%), #fff 66%);
+		background: linear-gradient(to top, lighten($shark, 50%), #fff 66%);
 	}
 	&::after {
-		background: linear-gradient(to bottom right, transparent, rgba(#22222a, 0.5) 25%, rgba(#22222a, 0.75) 50%, rgba(#22222a, 0.5) 75%, transparent);
+		background: linear-gradient(to bottom right, transparent, rgba($shark, 0.5) 25%, rgba($shark, 0.75) 50%, rgba($shark, 0.5) 75%, transparent);
 		display: block;
 		content: '';
 		position: absolute;

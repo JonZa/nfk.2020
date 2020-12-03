@@ -45,6 +45,7 @@ export default {
 
 <style lang="scss">
 @import '@/assets/mixins.scss';
+@import '@/assets/variables.scss';
 /* nunito-900 - latin */
 @font-face {
   font-family: 'Nunito';
@@ -85,7 +86,7 @@ html {
 	box-sizing: border-box;
 }
 body {
-	background-color: #22222a;
+	background-color: $shark;
 	background-repeat: no-repeat;
 	color: #fff;
 }
@@ -97,7 +98,6 @@ body {
 	min-width: 320px;
 	&::after,
 	&::before {
-		@include background-image('/me-mobile', jpg, 100%, auto, #22222a, transparent, 'to top');
 		display: block;
 		content: '';
 		position: fixed;
@@ -106,6 +106,10 @@ body {
 		right: 0;
 		padding-top: 56.25%;
 		z-index: -1;
+		background-image: linear-gradient(to top, $shark, transparent), url('~@/static/me.jpg?resize&size=480&format=webp');
+		@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+			background-image: linear-gradient(to top, $shark, transparent), url('~@/static/me.jpg?resize&size=960&format=webp');
+		}
 		@include bp(desktop) {
 			display: none;
 		}
@@ -150,7 +154,7 @@ h2 {
 	padding-top: 1px;
 	color: lighten(#95d2e4, 10%);
 	small {
-		color: mix(#fff, lighten(#22222a, 10%));
+		color: mix(#fff, lighten($shark, 10%));
 	}
 }
 h3 {
@@ -252,8 +256,8 @@ hr {
 		filter: blur(1px);
 	}
 	#{$a-tags} {
-		color: #ff99cc;
-		box-shadow: inset 0 -1px 0 #ff99cc;
+		color: $carnation;
+		box-shadow: inset 0 -1px 0 $carnation;
 		text-decoration: none;
 		transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 	}
