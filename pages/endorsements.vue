@@ -1,7 +1,7 @@
 <template>
 	<div class="contact">
 		<h1>
-			Praise
+			Endorsements
 		</h1>
 
 		<blockquote>

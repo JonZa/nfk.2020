@@ -1,9 +1,9 @@
 <template>
-	<nav class="nav__container" :class="navIsOpen ? 'nav__container--open' : ''">
-		<button class="nav__hamburger" :class="navIsOpen ? 'nav__hamburger--open' : ''" type="button" @click="$emit('toggle-nav-is-open')" aria-label="Show navigation"></button>
+	<nav class="nav__container" :class="navIsOpen ? 'nav__container--open' : ''" @click="$emit('toggle-nav-is-open')">
+		<button class="nav__hamburger" :class="navIsOpen ? 'nav__hamburger--open' : ''" type="button" aria-label="Show navigation"></button>
 		<ul class="nav__links" :class="navIsOpen ? 'nav__links--open' : ''" :style="{ '--children': links.length }">
 			<li v-for="(link, i) in links" :key="'link-' + i" :style="{ '--child-n': i + 1 }">
-				<nuxt-link :to="link.to" @click.native="$emit('toggle-nav-is-open')">{{ link.title }}</nuxt-link>
+				<nuxt-link :to="link.to">{{ link.title }}</nuxt-link>
 			</li>
 		</ul>
 	</nav>
@@ -31,8 +31,8 @@ export default {
 					to: '/experience'
 				},
 				{
-					title: 'Praise',
-					to: '/praise'
+					title: 'Endorsements',
+					to: '/endorsements'
 				},
 				{
 					title: 'Contact',
@@ -65,6 +65,11 @@ export default {
 			z-index: -1;
 		}
 		&--open {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
 			&::before {
 				background-image: radial-gradient(circle at top left, transparent 70.5%, rgba(#ca2c92, 0.5) 100%);
 			}
