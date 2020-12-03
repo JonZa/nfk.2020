@@ -46,7 +46,7 @@
 		<blockquote>
 			<picture class="blockquote__person">
 				<source srcset="~/static/people__joe.jpg?resize&size=114&format=webp 1x, ~/static/people__joe.jpg?resize&size=228&format=webp 2x" type="image/webp" />
-				<img src="~/static/people__no-pic.png?resize&size=114&format=jpg" type="image/jpeg" />
+				<img src="~/static/people__joe.jpg?resize&size=114&format=jpg" type="image/jpeg" />
 			</picture>
 			<p>Jon is extremely well respected by the web development community and the designers and developers that he has worked with. I recommend Jon highly and have no hesitation in endorsing Jon as a domain expert who has a very unique and highly sought after set of skills; and he is great to work with.</p>
 			<cite class="blockquote__citation">Joe da Silva, CEO at FormFunction Digital Consultants</cite>
@@ -63,10 +63,7 @@
 		</blockquote>
 		<hr />
 		<blockquote>
-			<picture class="blockquote__person">
-				<source srcset="~/static/people__no-pic.png?resize&size?resize&size=114&format=webp 1x, ~/static/people__no-pic.png?resize&size?resize&size=228&format=webp 2x" type="image/webp" />
-				<img src="~/static/people__no-pic.png?resize&size=228" />
-			</picture>
+			<picture class="blockquote__person" />
 			<p>Jon has been a vital part of our team — whenever we have had work that requires high-end responsive web templates, advanced Javascript, or front-end data integration, Jon has been our developer of choice.</p>
 			<cite class="blockquote__citation">Adam Sheik, CEO at Celerity Design</cite>
 		</blockquote>
@@ -81,10 +78,7 @@
 		</blockquote>
 		<hr />
 		<blockquote>
-			<picture class="blockquote__person">
-				<source srcset="~/static/people__no-pic.png?resize&size?resize&size=114&format=webp 1x, ~/static/people__no-pic.png?resize&size?resize&size=228&format=webp 2x" type="image/webp" />
-				<img src="~/static/people__no-pic.png?resize&size=228" />
-			</picture>
+			<picture class="blockquote__person" />
 			<p>I can ascribe directly to Jon's high degree of proficiency in his work as he greatly helped us to generate success in the business with his attention to detail, tireless work ethic, and his unwavering desire to ensure that our clients' needs were not only met, but also surpassed.</p>
 			<cite class="blockquote__citation">Bhavic Nana, Senior Developer, pi-squared</cite>
 		</blockquote>
@@ -135,10 +129,7 @@
 		</blockquote>
 		<hr />
 		<blockquote>
-			<picture class="blockquote__person">
-				<source srcset="~/static/people__no-pic.png?resize&size=114&format=webp 1x, ~/static/people__no-pic.png?resize&size=228&format=webp 2x" type="image/webp" />
-				<img src="~/static/people__no-pic.png?resize&size=228" />
-			</picture>
+			<picture class="blockquote__person" />
 			<p>I have really enjoyed working with Jon, On both UI projects and as my team lead. He has always provided great designs and has an intimate knowledge of all things html/CSS, UI and UX. He has been an amazing team lead, always offering great actionable advice and guidance.</p>
 			<cite class="blockquote__citation">Kieran Yeates, Software Developer at 4mation Technologies</cite>
 		</blockquote>

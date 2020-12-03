@@ -23,15 +23,6 @@ export default {
         name: "description",
         content: process.env.npm_package_description || "",
       },
-    ],
-    link: [
-      { rel: "icon", type: "image/x-icon", href: "/heart.svg" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com" },
-      {
-        rel: "stylesheet",
-        href:
-          "https://fonts.googleapis.com/css2?family=Alegreya:wght@400&family=Nunito:wght@900&display=swap"
-      }
     ]
   },
   /*
