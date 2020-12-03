@@ -23,7 +23,7 @@
 		<p>
 			You can <a href="JonMuller-min.pdf" download>download my resume</a>,<br class="soft" />
 			email me at <a href="mailto:jon.muller@gmail.com">jon.muller@gmail.com</a><br class="soft" />
-			or <nuxt-link to="/about">read more</nuxt-link> about me.
+			or <nuxt-link to="/about">read more about me</nuxt-link>.
 		</p>
 		<!-- <main>
 			<div class="post" v-for="post in sortedPosts" :key="post.id">
