@@ -5,18 +5,11 @@
 		</h1>
 		<p>Email me at <a href="mailto:jon.muller@gmail.com">jon.muller@gmail.com</a> or call me on <a href="tel:0466213376">0466&nbsp;213&nbsp;376</a>.</p>
 		<form name="contact" method="POST" data-netlify="true" @submit.prevent="handleSubmit">
-			<p>
-				<label>Your Name: <input type="text" name="name"/></label>
-			</p>
-			<p>
-				<label>Your Email: <input type="email" name="email"/></label>
-			</p>
-			<p>
-				<label>Message: <textarea name="message"></textarea></label>
-			</p>
-			<p>
-				<button type="submit">Send</button>
-			</p>
+			<input type="hidden" name="form-name" value="contact" />
+			<label>Your Name: <input type="text" name="name"/></label>
+			<label>Your Email: <input type="email" name="email"/></label>
+			<label>Message: <textarea name="message"></textarea></label>
+			<button type="submit">Send</button>
 		</form>
 	</div>
 </template>
@@ -26,7 +19,7 @@ export default {
 	methods: {
 		encode(data) {
 			return Object.keys(data)
-				.map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+				.map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
 				.join('&');
 		},
 		handleSubmit(e) {
