@@ -24,23 +24,23 @@ export default {
 				},
 				{
 					title: 'About',
-					to: '/about'
+					to: '/about/'
 				},
 				{
 					title: 'Experience',
-					to: '/experience'
+					to: '/experience/'
 				},
 				{
 					title: 'Endorsements',
-					to: '/endorsements'
+					to: '/endorsements/'
 				},
 				{
 					title: 'Contact',
-					to: '/contact'
+					to: '/contact/'
 				},
 				{
 					title: 'Game',
-					to: '/game'
+					to: '/game/'
 				}
 			]
 		};
@@ -54,6 +54,7 @@ export default {
 	&__container {
 		&::before {
 			display: block;
+			pointer-events: none;
 			content: '';
 			position: fixed;
 			right: 0;

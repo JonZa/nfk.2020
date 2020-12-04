@@ -4,7 +4,7 @@
 			Contact me
 		</h1>
 		<p>Email me at <a href="mailto:jon.muller@gmail.com">jon.muller@gmail.com</a> or call me on <a href="tel:0466213376">0466&nbsp;213&nbsp;376</a>.</p>
-		<form name="contact" method="POST" data-netlify="true">
+		<form name="contact" method="POST" data-netlify="true" @submit.prevent="handleSubmit">
 			<p>
 				<label>Your Name: <input type="text" name="name"/></label>
 			</p>
@@ -38,10 +38,10 @@ export default {
 				})
 			})
 				.then(() => {
-					alert('ok good');
+					console.log('ok good');
 				})
 				.catch(() => {
-					alert('oh no bad');
+					console.log('oh no bad');
 				});
 		}
 	}
