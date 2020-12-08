@@ -44,8 +44,9 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/assets/mixins.scss';
 @import '@/assets/variables.scss';
+@import '@/assets/mixins.scss';
+@import '@/assets/include-media.scss';
 /* nunito-900 - latin */
 @font-face {
 	font-family: 'Nunito';
@@ -76,48 +77,6 @@ html {
 	font-size: 100%;
 	word-spacing: 1px;
 	box-sizing: border-box;
-}
-body {
-	background-color: $shark;
-	background-repeat: no-repeat;
-	color: #fff;
-}
-.container {
-	padding: 100px 0 50px 0;
-	margin: 0 auto;
-	width: calc(100% - 40px);
-	max-width: 570px;
-	min-width: 320px;
-	&::after,
-	&::before {
-		display: block;
-		content: '';
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		padding-top: 56.25%;
-		z-index: -1;
-		background-image: linear-gradient(to top, $shark, transparent), url('~@/static/me.jpg?resize&size=480&format=webp');
-		background-size: cover;
-		@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
-			background-image: linear-gradient(to top, $shark, transparent), url('~@/static/me.jpg?resize&size=960&format=webp');
-		}
-		@include bp(desktop) {
-			display: none;
-		}
-	}
-	&::after {
-		filter: hue-rotate(90deg);
-		clip: rect(0, 0, 0, 0);
-		opacity: 0;
-		transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-	}
-	&--nav-is-open::after {
-		opacity: 1;
-		left: -10px;
-		animation: glitch-anim 5s linear infinite alternate;
-	}
 }
 h1 {
 	font-family: 'Nunito';
@@ -192,6 +151,7 @@ img {
 	max-width: 100%;
 }
 hr {
+	clear: both;
 	height: 17px;
 	border: 0;
 	margin-bottom: 25px;
@@ -241,12 +201,105 @@ hr {
 		opacity: 1;
 	}
 }
+body {
+	background-color: $shark;
+	background-repeat: no-repeat;
+	color: #fff;
+	@include media('>desktop') {
+		&::before {
+			display: block;
+			content: '';
+			position: fixed;
+			top: calc((100vh - 675px) / 2);
+			left: 50%;
+			transform: translatex(-50%);
+			bottom: calc((100vh - 675px) / 2);
+			background: #000;
+			width: calc(100% - 40px);
+			max-width: 1200px;
+			border-radius: 40px;
+		}
+	}
+}
+.container {
+	@include media('<desktop') {
+		&::after,
+		&::before {
+			display: block;
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			padding-top: 56.25%;
+			z-index: -1;
+			background-image: linear-gradient(to top, $shark, transparent), url('~@/static/me.jpg?resize&size=480&format=webp');
+			background-size: cover;
+			@include media('retina2x') {
+				background-image: linear-gradient(to top, $shark, transparent), url('~@/static/me.jpg?resize&size=960&format=webp');
+			}
+			@include media('>desktop') {
+				display: none;
+			}
+		}
+		&::after {
+			filter: hue-rotate(90deg);
+			clip: rect(0, 0, 0, 0);
+			opacity: 0;
+			transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+		}
+		&--nav-is-open::after {
+			opacity: 1;
+			left: -10px;
+			animation: glitch-anim 5s linear infinite alternate;
+		}
+	}
+	margin: 100px auto 50px auto;
+	width: calc(100% - 40px);
+	@include media('>desktop') {
+		display: flex;
+		flex-direction: column;
+		min-height: 675px;
+		max-width: 1200px;
+		margin: calc((100vh - 675px) / 2) auto 100px auto;
+		&::after,
+		&::before {
+			display: block;
+			content: '';
+			position: fixed;
+			background: $shark;
+			left: 50%;
+			width: 100%;
+			max-width: 570px;
+			z-index: 1;
+		}
+		&::before {
+			top: 0;
+			height: calc((100vh - 675px) / 2);
+		}
+		&::after {
+			bottom: 0;
+			height: calc((100vh - 675px) / 2 + 50px);
+			background: linear-gradient(to bottom, transparent, #000 50px, #ff99cc 50px, #ff99cc 55px, $shark 55px);
+		}
+	}
+}
 .content {
+	margin: 0 auto;
+	width: 100%;
 	max-width: 570px;
+	min-width: 320px;
+	@include media('>desktop') {
+		margin-right: 30px;
+		padding: 0 10px 50px 10px;
+		order: 2;
+	}
 	transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-	@at-root .container--nav-is-open & {
-		opacity: 0.25;
-		filter: blur(1px);
+	@include media('<desktop') {
+		@at-root .container--nav-is-open & {
+			opacity: 0.25;
+			filter: blur(1px);
+		}
 	}
 	#{$a-tags} {
 		color: $carnation;

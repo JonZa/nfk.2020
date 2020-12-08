@@ -1,6 +1,11 @@
 $mobile: 480;
 $tablet: 768;
 $desktop: 1200;
+$breakpoints: (
+	'phone': 480px,
+	'tablet': 768px,
+	'desktop': 1200px
+);
 
 $shark: #22222a;
 $cornflower: #95d2e4;

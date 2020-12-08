@@ -8,19 +8,9 @@ $a-tags-hover: 'a:active, a:hover, a.active';
 	}
 	background-image: #{$gradient} url($file+'.'+$type);
 	background-size: $width $height;
-	@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+	@include media('retina2x') {
 		& {
 			background-image: #{$gradient} url($file+'@2x.'+$type);
-		}
-	}
-}
-
-@mixin bp($point) {
-	$bp-desktop: '(min-width: 1024px)';
-
-	@if $point == desktop {
-		@media #{$bp-desktop} {
-			@content;
 		}
 	}
 }
@@ -34,7 +24,7 @@ $a-tags-hover: 'a:active, a:hover, a.active';
 		59% {
 			clip: rect(0, 0, 0, 0);
 		}
-		#{percentage(0.60 + $i*(0.30/$steps))} {
+		#{percentage(0.6 + $i*(0.3/$steps))} {
 			left: -10 + random(20) + px;
 			top: random(25) + px;
 			clip: rect(random(75) + px, 9999px, random(125) + px, 0);

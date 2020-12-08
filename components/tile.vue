@@ -26,7 +26,9 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/assets/variables.scss';
 @import '@/assets/mixins.scss';
+@import '@/assets/include-media.scss';
 .tile {
 	border: 0;
 	padding: 0;
@@ -37,7 +39,7 @@ export default {
 	cursor: pointer;
 	// @include background-image('/banksy', 'png', 320px, 320px);
 	background-image: url('~@/static/banksy.jpg?resize&size=320&format=webp');
-	@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+	@include media('retina2x') {
 		background-image: url('~@/static/banksy.jpg?resize&size=640&format=webp');
 		background-size: calc(var(--columns) * 100%);
 	}

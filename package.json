@@ -2,7 +2,7 @@
   "name": "nfk.st",
   "version": "1.0.0",
   "description": "nfk all the st",
-  "author": "geoffgraham and sdras",
+  "author": "jon, after geoffgraham and sdras",
   "private": true,
   "scripts": {
     "dev": "nuxt",

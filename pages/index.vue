@@ -86,9 +86,11 @@ export default {
 </script>
 
 <style lang="scss" scroped>
+@import '@/assets/variables.scss';
 @import '@/assets/mixins.scss';
+@import '@/assets/include-media.scss';
 br.soft {
-	@include bp(desktop) {
+	@include media('>desktop') {
 		display: none;
 	}
 }
