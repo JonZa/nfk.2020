@@ -162,7 +162,7 @@ export default {
 		overflow: hidden;
 		box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.75), inset -1px -1px 2px rgba(255, 255, 255, 0.75);
 		float: right;
-		width: 114px;
+		width: 116px;
 		margin: 2px 0 15px 15px;
 		border: 1px solid $cornflower;
 		position: relative;
