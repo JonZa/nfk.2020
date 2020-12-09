@@ -1,7 +1,7 @@
 <template>
 	<div class="container" :class="navIsOpen ? 'container--nav-is-open' : ''">
 		<nuxt class="content" />
-		<app-nav :navIsOpen="this.navIsOpen" @toggle-nav-is-open="toggleNavIsOpen" />
+		<app-nav :navIsOpen="this.navIsOpen" @toggle-nav-is-open="toggleNavIsOpen" ref="nav" />
 	</div>
 </template>
 
@@ -37,7 +37,11 @@ export default {
 	},
 	methods: {
 		toggleNavIsOpen() {
-			this.navIsOpen = !this.navIsOpen;
+			if (getComputedStyle(this.$refs.nav.$refs.hamburger).display === 'block') {
+				this.navIsOpen = !this.navIsOpen;
+			} else {
+				this.navIsOpen = false;
+			}
 		}
 	}
 };
@@ -256,6 +260,9 @@ body {
 	}
 	margin: 100px auto 50px auto;
 	width: calc(100% - 40px);
+	@include media('height<phoneHeight') {
+		margin-top: 50px;
+	}
 	@include media('>desktop') {
 		display: flex;
 		flex-direction: column;
@@ -291,7 +298,7 @@ body {
 	min-width: 320px;
 	@include media('>desktop') {
 		margin-right: 30px;
-		padding: 0 10px 50px 10px;
+		padding: 25px 10px 50px 10px;
 		order: 2;
 	}
 	transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -319,15 +326,13 @@ strong {
 blockquote {
 	p {
 		margin-bottom: 10px;
-		&:last-of-type {
-			margin-bottom: 5px;
-		}
 	}
 }
 cite {
 	font-style: normal;
 	color: #95d2e4;
 	display: block;
+			margin-bottom: 5px;
 }
 
 .icon {

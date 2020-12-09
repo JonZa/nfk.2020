@@ -1,6 +1,6 @@
 <template>
 	<nav class="nav__container" :class="navIsOpen ? 'nav__container--open' : ''" @click="$emit('toggle-nav-is-open')">
-		<button class="nav__hamburger" :class="navIsOpen ? 'nav__hamburger--open' : ''" type="button" aria-label="Show navigation"></button>
+		<button class="nav__hamburger" :class="navIsOpen ? 'nav__hamburger--open' : ''" type="button" aria-label="Show navigation" ref="hamburger"></button>
 		<ul class="nav__links" :class="navIsOpen ? 'nav__links--open' : ''" :style="{ '--children': links.length }">
 			<li v-for="(link, i) in links" :key="'link-' + i" :style="{ '--child-n': i + 1 }">
 				<nuxt-link :to="link.to">{{ link.title }}</nuxt-link>
@@ -31,8 +31,8 @@ export default {
 					to: '/experience/'
 				},
 				{
-					title: 'Endorsements',
-					to: '/endorsements/'
+					title: 'Recommendations',
+					to: '/recommendations/'
 				},
 				{
 					title: 'Contact',
@@ -127,6 +127,10 @@ export default {
 					transition-delay: calc(var(--child-n) * 0.05s);
 				}
 			}
+			@include media('height<phoneHeight') {
+				top: 5%;
+				transform: none;
+			}
 		}
 		@include media('>desktop') {
 			display: flex;
@@ -134,6 +138,7 @@ export default {
 			overflow: hidden;
 			background-image: linear-gradient(to bottom, $shark 50px, transparent 50px);
 			background-repeat: no-repeat;
+			margin: 0 25px;
 			&::before {
 				display: block;
 				pointer-events: none;
@@ -164,6 +169,9 @@ export default {
 			letter-spacing: 1px;
 			text-rendering: optimizeLegibility;
 			position: relative;
+			@include media('height<phoneHeight') {
+				margin-bottom: 0;
+			}
 			@include media('>desktop') {
 				padding: 15px 20px 20px 20px;
 				margin: 0;

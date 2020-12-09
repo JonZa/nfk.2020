@@ -26,7 +26,7 @@
 					}"
 				/>
 			</template>
-			<button v-on:click="start" class="zwipe__shuffle">Shuffle to Start</button>
+			<button v-on:click="start" v-if="!started" class="zwipe__shuffle">Shuffle to Start</button>
 		</div>
 	</div>
 </template>
@@ -171,25 +171,6 @@ $this: '.zwipe';
 		position: absolute;
 		transform: translate(-50%, -50%);
 		background: linear-gradient(to top, lighten($shark, 50%), #fff 66%);
-	}
-	&::after {
-		background: linear-gradient(to bottom right, transparent, rgba($shark, 0.5) 25%, rgba($shark, 0.75) 50%, rgba($shark, 0.5) 75%, transparent);
-		display: block;
-		content: '';
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		right: 0;
-		left: 0;
-		z-index: 1;
-	}
-	&--started {
-		#{$this}__shuffle,
-		&::after {
-			transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-			opacity: 0;
-			pointer-events: none;
-		}
 	}
 }
 button {
