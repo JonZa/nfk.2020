@@ -69,6 +69,17 @@ export default {
 	src: url('~@/static/fonts/alegreya-v16-latin-regular.eot'); /* IE9 Compat Modes */
 	src: local(''), url('~@/static/fonts/alegreya-v16-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('~@/static/fonts/alegreya-v16-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */ url('~@/static/fonts/alegreya-v16-latin-regular.woff') format('woff'), /* Modern Browsers */ url('~@/static/fonts/alegreya-v16-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */ url('~@/static/fonts/alegreya-v16-latin-regular.svg#Alegreya') format('svg'); /* Legacy iOS */
 }
+:root {
+	--transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+	--transition-duration: 0.35s;
+	--transition-property: all;
+	--transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+@media screen and (prefers-reduced-motion: reduce), (update: slow) {
+	:root {
+		--transition: none;
+	}
+}
 *,
 *:before,
 *:after {
@@ -89,18 +100,8 @@ h1 {
 	transform: translateY(-5px);
 	padding-top: 1px;
 	margin-bottom: 20px;
-	transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+	transition: var(--transition);
 	position: relative;
-	&:before,
-	&:after {
-		content: attr(title);
-		position: absolute;
-		left: 0;
-		top: 0;
-		width: 100%;
-		height: 100%;
-		overflow: hidden;
-	}
 }
 h2 {
 	font-family: 'Nunito';
@@ -209,24 +210,11 @@ body {
 	background-color: $shark;
 	background-repeat: no-repeat;
 	color: #fff;
-	@include media('>desktop') {
-		&::before {
-			display: block;
-			content: '';
-			position: fixed;
-			top: 50px;
-			left: 50%;
-			transform: translatex(-50%);
-			bottom: 50px;
-			background: #000;
-			width: calc(100% - 40px);
-			max-width: 1200px;
-			border-radius: 40px;
-		}
-	}
 }
 .container {
-	@include media('<desktop') {
+	@include media('<tablet') {
+		margin: 100px auto 50px auto;
+		width: calc(100% - 40px);
 		&::after,
 		&::before {
 			display: block;
@@ -242,7 +230,7 @@ body {
 			@include media('retina2x') {
 				background-image: linear-gradient(to top, $shark, transparent), url('~@/static/me.jpg?resize&size=960&format=webp');
 			}
-			@include media('>desktop') {
+			@include media('>=tablet') {
 				display: none;
 			}
 		}
@@ -250,7 +238,7 @@ body {
 			filter: hue-rotate(90deg);
 			clip: rect(0, 0, 0, 0);
 			opacity: 0;
-			transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+			transition: var(--transition);
 		}
 		&--nav-is-open::after {
 			opacity: 1;
@@ -258,51 +246,57 @@ body {
 			animation: glitch-anim 5s linear infinite alternate;
 		}
 	}
-	margin: 100px auto 50px auto;
-	width: calc(100% - 40px);
 	@include media('height<phoneHeight') {
 		margin-top: 50px;
 	}
-	@include media('>desktop') {
-		display: flex;
-		flex-direction: column;
-		min-height: 675px;
-		max-width: 1200px;
-		margin: calc((100vh - 675px) / 2) auto 100px auto;
-		&::after,
-		&::before {
+	@include media('>=tablet') {
+		position: relative;
+		&::before,
+		&::after {
 			display: block;
 			content: '';
 			position: fixed;
-			background: $shark;
-			left: 50%;
-			width: 100%;
-			max-width: 570px;
-			z-index: 1;
 		}
 		&::before {
 			top: 0;
-			height: calc((100vh - 675px) / 2);
+			left: 0;
+			width: 50%;
+			height: 100vh;
+			transition: var(--transition);
+			background-image: linear-gradient(to left, $shark, transparent), url('~@/static/me.jpg?resize&size=600&format=webp');
+			background-size: cover;
+			background-position: top right;
+			background-repeat: no-repeat;
+			@include media('retina2x') {
+				background-image: linear-gradient(to left, $shark, transparent), url('~@/static/me.jpg?resize&size=1200&format=webp');
+			}
+			z-index: -1;
 		}
 		&::after {
+			left: 50%;
+			width: 50%;
+			max-width: 640px;
+			z-index: 1;
 			bottom: 0;
-			height: calc((100vh - 675px) / 2 + 50px);
-			background: linear-gradient(to bottom, transparent, #000 50px, #ff99cc 50px, #ff99cc 55px, $shark 55px);
+			height: 50px;
+			background: linear-gradient(to bottom, transparent, $shark 45px, #ff99cc 45px);
 		}
 	}
 }
 .content {
 	margin: 0 auto;
 	width: 100%;
-	max-width: 570px;
+	max-width: 600px;
 	min-width: 320px;
-	@include media('>desktop') {
-		margin-right: 30px;
-		padding: 25px 10px 50px 10px;
+	@include media('>=tablet') {
+		width: 50%;
+		max-width: 620px;
+		margin-left: 50%;
+		padding: 100px 20px 50px 10px;
 		order: 2;
 	}
-	transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-	@include media('<desktop') {
+	transition: var(--transition);
+	@include media('<tablet') {
 		@at-root .container--nav-is-open & {
 			opacity: 0.25;
 			filter: blur(1px);
@@ -312,7 +306,7 @@ body {
 		color: $carnation;
 		box-shadow: inset 0 -1px 0 $carnation;
 		text-decoration: none;
-		transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+		transition: var(--transition);
 	}
 	#{$a-tags-hover} {
 		color: #fff;
@@ -332,7 +326,7 @@ cite {
 	font-style: normal;
 	color: #95d2e4;
 	display: block;
-			margin-bottom: 5px;
+	margin-bottom: 5px;
 }
 
 .icon {

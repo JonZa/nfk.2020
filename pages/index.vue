@@ -90,7 +90,7 @@ export default {
 @import '@/assets/mixins.scss';
 @import '@/assets/include-media.scss';
 br.soft {
-	@include media('>desktop') {
+	@include media('>=tablet') {
 		display: none;
 	}
 }

@@ -150,12 +150,23 @@ export default {
 
 <style lang="scss">
 @import '@/assets/variables.scss';
+@import '@/assets/mixins.scss';
+@import '@/assets/include-media.scss';
 $this: '.zwipe';
 #{$this} {
-	width: 320px;
-	height: 320px;
+	--square: 320px;
+	width: var(--square);
+	height: var(--square);
 	margin: 0 auto;
 	position: relative;
+	@include media('>=tablet') {
+		--square: 480px;
+		margin: 0;
+	}
+	@include media('>=desktop') {
+		--square: 560px;
+		margin: 0;
+	}
 	&__shuffle {
 		border: 0;
 		box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.75), inset -1px -1px 2px rgba(255, 255, 255, 0.75);

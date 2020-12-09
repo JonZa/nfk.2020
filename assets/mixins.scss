@@ -31,3 +31,10 @@ $a-tags-hover: 'a:active, a:hover, a.active';
 		}
 	}
 }
+
+@mixin desktopShape {
+	width: 100%;
+	max-width: calc(100vw - 100px);
+	height: calc((100vw - 100px) / 16 * 9);
+	max-height: calc(100vh - 100px);
+}

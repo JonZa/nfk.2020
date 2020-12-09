@@ -54,7 +54,7 @@ export default {
 @import '@/assets/include-media.scss';
 .nav {
 	&__container {
-		@include media('<desktop') {
+		@include media('<tablet') {
 			&::before {
 				display: block;
 				pointer-events: none;
@@ -64,7 +64,7 @@ export default {
 				bottom: 0;
 				width: 150px;
 				height: 150px;
-				transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+				transition: var(--transition);
 				background-image: radial-gradient(circle at top left, transparent 70.5%, #39687f 100%);
 				z-index: -1;
 			}
@@ -75,50 +75,33 @@ export default {
 				right: 0;
 				bottom: 0;
 				&::before {
-					background-image: radial-gradient(circle at top left, transparent 70.5%, rgba(#ca2c92, 0.5) 100%);
+					background-image: radial-gradient(circle at top left, transparent 70.5%, rgba($carnation, 0.5) 100%);
 				}
 			}
 		}
-		@include media('>desktop') {
-			order: 1;
-			position: sticky;
-			top: calc((100vh - 675px) / 2);
-			background-position: 0 50%;
-			&::before {
-				display: block;
-				pointer-events: none;
-				content: '';
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 50%;
-				height: 675px;
-				transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-				background-image: linear-gradient(to left, #000, transparent), url('~@/static/me.jpg?resize&size=600&format=webp');
-				background-size: cover;
-				background-position: top right;
-				@include media('retina2x') {
-					background-image: linear-gradient(to left, #000, transparent), url('~@/static/me.jpg?resize&size=1200&format=webp');
-				}
-				z-index: -1;
-				border-radius: 40px 0 0 40px;
-			}
+		@include media('>=tablet') {
+			position: fixed;
+			top: 0;
+			width: 100%;
 		}
 	}
 	&__links {
 		list-style-type: none;
 		padding: 0;
-		@include media('<desktop') {
+		@include media('<tablet') {
 			position: fixed;
 			left: 100%;
 			top: 50%;
 			text-transform: uppercase;
 			text-align: right;
 			transform: translateY(-50%);
+			#{$a-tags-hover} {
+				letter-spacing: 2px;
+			}
 			li {
 				margin: 5px 0;
 				transform: translatex(0);
-				transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+				transition: var(--transition);
 				transition-delay: calc((var(--children) - var(--child-n)) * 0.05s);
 			}
 			&--open {
@@ -132,25 +115,12 @@ export default {
 				transform: none;
 			}
 		}
-		@include media('>desktop') {
+		@include media('>=tablet') {
 			display: flex;
 			justify-content: space-around;
-			overflow: hidden;
-			background-image: linear-gradient(to bottom, $shark 50px, transparent 50px);
-			background-repeat: no-repeat;
-			margin: 0 25px;
-			&::before {
-				display: block;
-				pointer-events: none;
-				content: '';
-				position: absolute;
-				top: 0;
-				left: 0;
-				right: 0;
-				height: 100px;
-				background-image: linear-gradient(to bottom, #000 50px, transparent);
-				border-radius: 40px 40px 0 0;
-			}
+			background: linear-gradient(to bottom, $shark, rgba($shark, 0.85) 45px, transparent);
+			margin-bottom: 0;
+			padding-bottom: 20px;
 			li {
 				transform: none;
 			}
@@ -165,19 +135,21 @@ export default {
 			padding: 6px 50px 4px 15px;
 			margin-bottom: 10px;
 			text-decoration: none;
-			transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+			transition: var(--transition);
+			transition-duration: calc(var(--transition-duration) * 2);
 			letter-spacing: 1px;
 			text-rendering: optimizeLegibility;
 			position: relative;
 			@include media('height<phoneHeight') {
 				margin-bottom: 0;
 			}
-			@include media('>desktop') {
+			@include media('>=tablet') {
 				padding: 15px 20px 20px 20px;
 				margin: 0;
 				font-size: 20px;
 				text-transform: uppercase;
 				transform: none;
+				border-top: 5px solid transparent;
 			}
 			&::before,
 			&::after {
@@ -192,8 +164,8 @@ export default {
 				height: 5px;
 				border-radius: 10px;
 				transform: translatey(-50%);
-				transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-				@include media('>desktop') {
+				transition: var(--transition);
+				@include media('>=tablet') {
 					top: auto;
 					bottom: 5px;
 					right: auto;
@@ -203,16 +175,17 @@ export default {
 			}
 			&::before {
 				transform: translatey(-50%) rotate(90deg);
-				@include media('>desktop') {
+				@include media('>=tablet') {
 					transform: translatex(-50%) rotate(90deg) scale(0.75);
 				}
 			}
 		}
-		#{$a-tags-hover} {
-			color: #ca2c92;
+		#{$a-tags-hover},
+		a.nuxt-link-exact-active {
+			color: $carnation;
 			&::before,
 			&::after {
-				background: rgba(#ca2c92, 0.5);
+				background: rgba($carnation, 0.5);
 			}
 			&::before {
 				transform: translatey(-50%) rotate(135deg) scale(1.2);
@@ -220,7 +193,8 @@ export default {
 			&::after {
 				transform: translatey(-50%) rotate(45deg) scale(1.2);
 			}
-			@include media('>desktop') {
+			@include media('>=tablet') {
+				border-color: $carnation;
 				&::before {
 					transform: translatex(-50%) rotate(135deg) scale(1);
 				}
@@ -229,15 +203,10 @@ export default {
 				}
 			}
 		}
-		@include media('<desktop') {
-			#{$a-tags-hover} {
-				letter-spacing: 2px;
-			}
-		}
 	}
 	&__hamburger {
 		display: none;
-		@include media('<desktop') {
+		@include media('<tablet') {
 			display: block;
 			outline: 0;
 			position: fixed;
@@ -260,7 +229,7 @@ export default {
 				width: 20px;
 				height: 9px;
 				transform: translate(-50%, calc(-50% + 3px));
-				transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+				transition: var(--transition);
 				border-top: 3px solid #38667e;
 				border-bottom: 3px solid #38667e;
 			}
@@ -270,7 +239,7 @@ export default {
 			&--open {
 				&::before,
 				&::after {
-					background: rgba(#ca2c92, 0.5);
+					background: rgba($carnation, 0.5);
 					border-radius: 10px;
 					border-color: transparent;
 					height: 5px;
