@@ -214,10 +214,10 @@ body {
 			display: block;
 			content: '';
 			position: fixed;
-			top: calc((100vh - 675px) / 2);
+			top: 50px;
 			left: 50%;
 			transform: translatex(-50%);
-			bottom: calc((100vh - 675px) / 2);
+			bottom: 50px;
 			background: #000;
 			width: calc(100% - 40px);
 			max-width: 1200px;
