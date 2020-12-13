@@ -210,6 +210,7 @@ body {
 	background-color: $shark;
 	background-repeat: no-repeat;
 	color: #fff;
+	min-height: 107.5vh;
 }
 .container {
 	@include media('<tablet') {

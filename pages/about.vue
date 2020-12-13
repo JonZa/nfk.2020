@@ -10,7 +10,7 @@
 		<p>
 			Yeah, Javascript is cool, but have you tried writing less code and getting better results?
 		</p>
-		<p>I love Javascript, but valuing HTML, mastering CSS, and <strong>understanding browsers</strong> means I spend less time writing slow, brittle, convoluted Javascript; more time writing lean, accessible, semantic HTML; and more time writing smooth, responsive, extensible CSS.</p>
+		<p>I love Javascript, but valuing HTML, mastering CSS, and <strong>understanding browsers</strong> means I spend less time writing slow, brittle, convoluted Javascript; more time writing lean, accessible, semantic HTML, and writing smooth, responsive, extensible CSS.</p>
 		<h2>
 			About this site
 		</h2>
@@ -18,9 +18,6 @@
 			<strong>This site is currently under construction.</strong> The immediate to-do list:
 		</p>
 		<ul>
-			<li>
-				Desktop stylesheet; currently site is mobile-only, but you can get a <a href="https://www.figma.com/file/1gpEBUItQnwJ6vTKqjQMwv/nfk.st?node-id=0%3A1" target="_blank" rel="noopener">sneak-peek preview of the desktop designs on Figma</a>
-			</li>
 			<li>
 				Content; definitely needs some fleshing out
 			</li>

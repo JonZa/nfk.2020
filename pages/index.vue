@@ -12,7 +12,7 @@
 			<strong>“fantastic to work with”</strong><br class="soft" />
 			by a client,<br />
 			<strong>“great at simplifying complex problems”</strong><br class="soft" />
-			by a colleague, and<br />
+			by a manager, and<br />
 			<strong>“the best manager I have worked for”</strong><br class="soft" />
 			by a teammate.
 		</p>
